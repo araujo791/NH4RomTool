@@ -113,8 +113,8 @@ if(VERIFYPROG):
 # Var
 VERSION = utils.getCurrentVersion()
 AUTHOR = "affggh"
-WINDOWTITLE = "NH4RomTool " + " [版本: " + VERSION + "] [作者: " + AUTHOR + "]"
-THEME = "minty"  # 设置默认主题
+WINDOWTITLE = "NH4RomTool " + " [Versão: " + VERSION + "] [Autor: " + AUTHOR + "]"
+THEME = "minty"  # Definir tema padrão
 LOGOICO = ".\\bin\\logo.ico"
 BANNER = ".\\bin\\banner"
 TEXTFONT = ['Arial', 5]
@@ -139,7 +139,7 @@ if(USESTATUSBAR):
 if(EXECPATH):
     utils.addExecPath(EXECPATH)
 
-if(HIDE_CONSOLE):  # 隐藏控制台
+if(HIDE_CONSOLE):  # Ocultar console
     utils.hideForegroundWindow
 
 style = Style(theme=THEME)
@@ -156,7 +156,7 @@ if USESTATUSBAR:
     height += 80
 
 root.geometry("%sx%s" %(width,height))
-# root.resizable(0,0) # 设置最大化窗口不可用
+# root.resizable(0,0) # A configuração da janela maximizada não está disponível
 root.title(WINDOWTITLE)
 
 # Set images
@@ -177,30 +177,30 @@ if(ALLOWMODIFYCMD):
     USERCMD = tk.StringVar()
 
 # from https://www.i4k.xyz/article/weixin_49317370/108878373
-class myStdout():	# 重定向类
+class myStdout():	# Redirecionar classe
     def __init__(self):
-    	# 将其备份
+    	# apoia-la
         self.stdoutbak = sys.stdout		
         self.stderrbak = sys.stderr
-        # 重定向
+        # Redirecionar
         sys.stdout = self
         sys.stderr = self
 
     def write(self, info):
-        # info信息即标准输出sys.stdout和sys.stderr接收到的输出信息
-        # text.insert('end', info)	# 在多行文本控件最后一行插入print信息
-        # text.update()	# 更新显示的文本，不加这句插入的信息无法显示
-        # text.see(tkinter.END)	# 始终显示最后一行，不加这句，当文本溢出控件最后一行时，不会自动显示最后一行
+        # info A informação é saída padrão sys.stdout e sys.stderr Informações de saída recebidas
+        # text.insert('end', info)	# Inserir na última linha de um controle de texto multilinha print Informação
+        # text.update()	# Atualize o texto exibido. As informações inseridas sem esta frase não podem ser exibidas.
+        # text.see(tkinter.END)	# Exibir sempre a última linha Sem esta frase, quando o texto ultrapassar a última linha do controle, a última linha não será exibida automaticamente.
         if(TEXTREADONLY):
             text.configure(state='normal')
         text.insert(END,"[%s]" %(utils.get_time()) + "%s" %(info))
-        text.update() # 实时返回信息
+        text.update() # Retornar informações em tempo real
         text.yview('end')
         if(TEXTREADONLY):
             text.configure(state='disable')
 
     def restoreStd(self):
-        # 恢复标准输出
+        # restaurar a saída padrão
         sys.stdout = self.stdoutbak
         sys.stderr = self.stderrbak
 
@@ -213,7 +213,7 @@ class MyThread(threading.Thread):
         self.args = args
         
         self.setDaemon(True)
-        self.start()    # 在这里开始
+        self.start()    # começa aqui
         
     def run(self):
         self.func(*self.args)
@@ -234,7 +234,7 @@ def showinfo(textmsg):
     if(TEXTREADONLY):
         text.configure(state='normal')
     text.insert(END,"[%s]" %(utils.get_time()) + "%s" %(textmsg) + "\n")
-    text.update() # 实时返回信息
+    text.update() # Retornar informações em tempo real
     text.yview('end')
     if(TEXTREADONLY):
         text.configure(state='disable')
@@ -244,7 +244,7 @@ def showontime(textmsg):
         text.configure(state='normal')
     # text.delete(1.0, END)
     text.insert(END,"[%s]" %(utils.get_time()) + "%s" %(textmsg) + "\n")
-    text.update() # 实时返回信息
+    text.update() # Retornar informações em tempo real
     if(TEXTREADONLY):
         text.configure(state='disable')
 
@@ -290,7 +290,7 @@ def showbanner():
 def cleaninfo():
     if(TEXTREADONLY):
         text.configure(state='normal')
-    text.delete(1.0, END)  # 清空text
+    text.delete(1.0, END)  # Texto claro
     # text.image_create(END,image=LOGOIMG)
     # text.insert(END,"\n")
     showbanner()
@@ -298,12 +298,12 @@ def cleaninfo():
         text.configure(state='disable')
 
 def selectFile():
-    filepath = askopenfilename()                   # 选择打开什么文件，返回文件名
-    filename.set(filepath.replace('/', '\\'))      # 设置变量filename的值
+    filepath = askopenfilename()                   # Selecione qual arquivo abrir e retorne o nome do arquivo
+    filename.set(filepath.replace('/', '\\'))      #Defina o valor da variável nome do arquivo
     showinfo("选择文件为: %s" %(filepath.replace('/', '\\')))
 
 def selectDir():
-    dirpath = askdirectory()                   # 选择文件夹
+    dirpath = askdirectory()                   # Selecione a pasta
     directoryname.set(dirpath.replace('/', '\\'))
     showinfo("选择文件夹为: %s" %(dirpath.replace('/', '\\')))
 
@@ -311,10 +311,10 @@ def about():
     root2 = tk.Toplevel()
     curWidth = 300
     curHight = 180
-    # 获取屏幕宽度和高度
+    # Obtenha largura e altura da tela
     scn_w, scn_h = root.maxsize()
     # print(scn_w, scn_h)
-    # 计算中心坐标
+    # Calcular coordenadas centrais
     cen_x = (scn_w - curWidth) / 2
     cen_y = (scn_h - curHight) / 2
     # print(cen_x, cen_y)
@@ -343,10 +343,10 @@ def userInputWindow(title='输入文本'):
     inputWindow = tk.Toplevel()
     curWidth = 400
     curHight = 120
-    # 获取屏幕宽度和高度
+    # Obtenha largura e altura da tela
     scn_w, scn_h = root.maxsize()
     # print(scn_w, scn_h)
-    # 计算中心坐标
+    # Calcular coordenadas centrais
     cen_x = (scn_w - curWidth) / 2
     cen_y = (scn_h - curHight) / 2
     # print(cen_x, cen_y)
